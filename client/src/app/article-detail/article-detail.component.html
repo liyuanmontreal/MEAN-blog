@@ -1,0 +1,61 @@
+<div *ngIf="viewMode; else editable">
+
+    <div *ngIf="currentArticle._id">
+        <h4>{{ currentArticle.title }}</h4>     
+        <p>{{ currentArticle.content }}</p>      
+     
+      <a class="badge badge-warning" 
+         (click)="editArticle()">
+         Edit
+       </a>
+    </div>    
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="currentArticle._id" class="edit-form">
+      <h4>Edit Article</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentArticle.title"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="content">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="content"
+            [(ngModel)]="currentArticle.content"
+            name="content"
+          />
+        </div>
+      </form>
+  
+   
+     
+  
+      <button class="badge badge-danger mr-2" (click)="deleteArticle()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateArticle()"
+      >
+        Update
+      </button>
+      <p>{{ message }}</p>
+    </div>
+  
+    <div *ngIf="!currentArticle._id">
+      <br />
+      <p>Cannot access this Article...</p>
+    </div>
+  </ng-template>
